@@ -15,8 +15,13 @@ class ProductManager {
             }else{
                 product.id = this.products[this.products.length-1].id + 1;
             }
-            this.products.push(product);
-            console.log(`El producto ${product.title} fue agregado con exito`);
+            if (product.title === "" || product.description === "" || product.price === "" || product.thumbnail === "" || product.code === "" || product.stock === "") {
+                console.log(`Error no se puede agregar el producto con campos vacios`);
+            }else{
+                this.products.push(product);
+                console.log(`El producto ${product.title} fue agregado con exito`);
+            }
+           
         }
     }
 
@@ -85,6 +90,13 @@ console.log(manager)
 manager.getProductById(1);
 manager.getProductById(2);
 manager.getProductById(5);
+
+// Error campos vacios
+const celular2 = new product("","","","","","");
+
+manager.addProduct(celular2);
+
+
 
 
 
