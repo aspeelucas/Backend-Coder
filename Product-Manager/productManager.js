@@ -1,6 +1,8 @@
-const fs = require("fs");
 
-class ProductManager {
+import fs from "fs";
+
+
+export class ProductManager {
     constructor(path) {
         this.path = path;
         try {
@@ -121,7 +123,7 @@ class ProductManager {
 
 }
 
-class product {
+ export class product {
     constructor(title, description, price, thumbnail, code, stock) {
 
         this.title = title;
@@ -201,5 +203,4 @@ const main = async () => {// TEST  si quiere probar el funcionamiento desmarque 
     console.log('\nElimina el producto con el id indicado.\n')
     await manager.deleteProduct(3);
 }
-main();
-
+// main();
