@@ -152,6 +152,14 @@ const main = async () => {// TEST  si quiere probar el funcionamiento desmarque 
     const celular = new product("Samsung", "celular", 1000, "http:zzz", 124, 11);
     // console.log(celular);
     const tablet = new product("Ipad", "tablet", 1500, "http:zzz", 125, 12);
+
+    const motorola = new product("Motorola", "celular", 1000, "http:zzz", 127, 14);
+    const samsung = new product("Samsung", "galaxy", 1000, "http:zzz", 128, 15);
+    const lg = new product("LG", "lavarropa", 1000, "http:zzz", 129, 16);
+    const sony = new product("Sony", "televisor", 1000, "http:zzz", 130, 17);
+    const philips = new product("Philips", "televisor", 1000, "http:zzz", 131, 18);
+    const hitachi = new product("Hitachi", "televisor", 1000, "http:zzz", 132, 19);
+    const noblex = new product("Noblex", "televisor", 1000, "http:zzz", 133, 20);
     // console.log(tablet);
 
     // Metodos de la clase :
@@ -163,6 +171,14 @@ const main = async () => {// TEST  si quiere probar el funcionamiento desmarque 
     await manager.addProduct(computadoras);
     await manager.addProduct(celular);
     await manager.addProduct(tablet);
+    await manager.addProduct(motorola);
+    await manager.addProduct(samsung);
+    await manager.addProduct(lg);
+    await manager.addProduct(sony);
+    await manager.addProduct(philips);  
+    await manager.addProduct(hitachi);
+    await manager.addProduct(noblex);
+
 
 
     console.log('\nError al agregar un producto con el mismo codigo.\n')
@@ -189,18 +205,18 @@ const main = async () => {// TEST  si quiere probar el funcionamiento desmarque 
 
 
     console.log('\nActualiza el producto con el id indicado y lo guarda en el archivo.\n')
-    const televisor = new product("LG", "televisor", 2010, "http:zzz", 125, 18); // code que ya existe al id que tiene el mismo code lo actualiza.
-    const televisor2 = new product("Hitachi", "televisor", 2011, "http:zzz", 125, 12); // code que ya existe a un id diferente no actualiza.
+    const televisor = new product("LG", "televisor", 2010, "http:zzz", 125, 18);                 // code que ya existe al id que tiene el mismo code lo actualiza.
+    const televisor2 = new product("Hitachi", "televisor", 2011, "http:zzz", 125, 12);            // code que ya existe a un id diferente no actualiza.
 
-    await manager.udpateProduct(3, televisor);
-    console.log(await manager.getProductById(3))
+    // await manager.udpateProduct(3, televisor);
+    // console.log(await manager.getProductById(3))
 
-    console.log('\nError al actualizar un producto con el mismo codigo.\n')
-    await manager.udpateProduct(1, televisor2);
-    console.log(await manager.getProductById(1))
+    // console.log('\nError al actualizar un producto con el mismo codigo.\n')
+    // await manager.udpateProduct(1, televisor2);
+    // console.log(await manager.getProductById(1))
 
 
-    console.log('\nElimina el producto con el id indicado.\n')
-    await manager.deleteProduct(3);
+    // console.log('\nElimina el producto con el id indicado.\n')
+    // await manager.deleteProduct(3);
 }
 // main();

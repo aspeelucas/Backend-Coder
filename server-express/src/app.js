@@ -15,7 +15,7 @@ app.get('/products',  async (req, res) => {
   const {limit} = req.query;
   const products = await productManager.getProducts();
   if (limit) {
-    res.json(products.slice(0, limit));
+    return res.json(products.slice(0, limit));
   } 
   return res.json(products);
 }); 
@@ -31,10 +31,10 @@ app.get('/products/:pid', async (req, res) => {
   if (productId) {
     return res.json(productId);
   }
-  return res.status(404).json({ error: 'Product not found' });
+  return res.status(404).json({ error: 'El producto solicitado no existe' });
 });
 
 
 app.listen(PORT, () => {
-  console.log('Server started on port 8080');
+  console.log(`Servidor iniciado en el puerto : ${PORT}`);
 }); 
