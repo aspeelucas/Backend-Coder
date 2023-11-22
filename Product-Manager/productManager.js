@@ -31,9 +31,10 @@ export class ProductManager {
                 !product.title  ||
                 !product.description  ||
                 !product.price  ||
-                !product.thumbnail  ||
+                !product.thumbnail?.length  ||
                 !product.code  ||
-                !product.stock 
+                !product.stock  ||
+                !product.status
             ) {
                 console.log(`Error no se puede agregar el producto con campos vacios`);
             } else {
@@ -59,7 +60,8 @@ export class ProductManager {
     async getProductById(id) {
 
         try {
-            const product = (await this.getProducts()).find((product) => product.id === id);
+            const products = await this.getProducts();
+            const product = products.find((product) => product.id === id);
             if (product) {
                 return product;
             } else {
@@ -78,8 +80,13 @@ export class ProductManager {
     async udpateProduct(id, product) {
         try {
             const productFound = await this.getProductById(id);
-            if (productFound) {
+           
+            if (!productFound) {
+                throw new Error(`Producto no encontrado`);
+            }
+            else{
                 const { title, description, price, thumbnail, code, stock } = product;
+                console.log(product)
                 if (this.codeExist(code) && code !== productFound.code) {
                     throw new Error(`El codigo ${code} ya existe`);
                 }
@@ -98,40 +105,44 @@ export class ProductManager {
                 catch (error) {
                     console.log(`error al guardar el archivo ${error}`);
                 }
-            } else {
-                console.log(`Not Found`);
-            }
+            }    
         } catch (error) {
-            console.error(error.message);
+            console.error(`Error al actuliazar el producto:`,error.message);
         }
     }
     async deleteProduct(id) {
-        const productFound = await this.getProductById(id);
-        if (productFound) {
-            const udpatedProducts = this.products.filter((product) => product.id !== id);
-            try {
-                await fs.promises.writeFile(this.path, JSON.stringify(udpatedProducts, null, '\t'));
-                console.log(`El archivo fue guardado con exito`);
+        try {
+            const productFound = await this.getProductById(id);
+            if (!productFound) {
+                throw new Error(`Producto no encontrado`);
             }
-            catch (error) {
-                console.log(`error al guardar el archivo ${error}`);
+            else {
+                const udpatedProducts = this.products.filter((product) => product.id !== id);
+                try {
+                    await fs.promises.writeFile(this.path, JSON.stringify(udpatedProducts, null, '\t'));
+                    console.log(`El archivo fue borrado con exito`);
+                }
+                catch (error) {
+                    console.log(`Error al guardar el archivo ${error}`);
+                }
             }
-        } else {
-            console.log(`Not Found`);
+        } catch (error) {
+            console.error(`Error al eliminar el producto:`, error.message);
         }
     }
 
 }
 
- export class product {
-    constructor(title, description, price, thumbnail, code, stock) {
-
+ export class Product {
+    constructor(title, description, price, thumbnail, code, stock,status) {
+        this.id = null;
         this.title = title;
         this.price = price;
         this.description = description;
         this.thumbnail = thumbnail;
         this.code = code;
         this.stock = stock;
+        this.status = status;
     }
 }
 
@@ -139,27 +150,28 @@ const main = async () => {// TEST  si quiere probar el funcionamiento desmarque 
 
     // Crea objetos utilizando la clase product .
 
-    const computadoras = new product(
+    const computadoras = new Product(
         "Lenovo",
         "pc portatil",
         2000,
         "http:zzz",
         123,
-        10
+        10,
+        true
     );
 
     // console.log(computadoras);
-    const celular = new product("Samsung", "celular", 1000, "http:zzz", 124, 11);
+    const celular = new Product("Samsung", "celular", 1000, "http:zzz", 124, 11,true);
     // console.log(celular);
-    const tablet = new product("Ipad", "tablet", 1500, "http:zzz", 125, 12);
+    const tablet = new Product("Ipad", "tablet", 1500, "http:zzz", 125, 12,true,);
 
-    const motorola = new product("Motorola", "celular", 1000, "http:zzz", 127, 14);
-    const samsung = new product("Samsung", "galaxy", 1000, "http:zzz", 128, 15);
-    const lg = new product("LG", "lavarropa", 1000, "http:zzz", 129, 16);
-    const sony = new product("Sony", "televisor", 1000, "http:zzz", 130, 17);
-    const philips = new product("Philips", "televisor", 1000, "http:zzz", 131, 18);
-    const hitachi = new product("Hitachi", "televisor", 1000, "http:zzz", 132, 19);
-    const noblex = new product("Noblex", "televisor", 1000, "http:zzz", 133, 20);
+    const motorola = new Product("Motorola", "celular", 1000, "http:zzz", 127, 14,true);
+    const samsung = new Product("Samsung", "galaxy", 1000, "http:zzz", 128, 15,true);
+    const lg = new Product("LG", "lavarropa", 1000, "http:zzz", 129, 16,true);
+    const sony = new Product("Sony", "televisor", 1000, "http:zzz", 130, 17,true);
+    const philips = new Product("Philips", "televisor", 1000, "http:zzz", 131, 18,true);
+    const hitachi = new Product("Hitachi", "televisor", 1000, "http:zzz", 132, 19,true);
+    const noblex = new Product("Noblex", "televisor", 1000, "http:zzz", 133, 20,true);
     // console.log(tablet);
 
     // Metodos de la clase :

@@ -1,8 +1,7 @@
 import express from 'express';
-import { ProductManager } from '../../Product-Manager/productManager.js';
+import { productsRouter } from './router/productsRouter.js';
+import { cartRouter } from './router/cartRouter.js';
 
-
-const productManager = new ProductManager('./Product-Manager/productos.json');
 
 
 const app = express();
@@ -11,28 +10,12 @@ const PORT = 8080;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/products',  async (req, res) => {
-  const {limit} = req.query;
-  const products = await productManager.getProducts();
-  if (limit) {
-    return res.json(products.slice(0, limit));
-  } 
-  return res.json(products);
-}); 
 
 
-app.get('/products/:pid', async (req, res) => {
-  const { pid } = req.params;
-  console.log(pid)
+app.use('/api/products', productsRouter);
+app.use('/api/cart', cartRouter);
 
-  const products = await productManager.getProducts();
-  const  productId = products.find((product) => product.id === Number(pid));
 
-  if (productId) {
-    return res.json(productId);
-  }
-  return res.status(404).json({ error: 'El producto solicitado no existe' });
-});
 
 
 app.listen(PORT, () => {
