@@ -1,0 +1,22 @@
+<div>
+
+<div>
+    <h1>Real time products</h1>
+</div>
+<div><p>Agregar Producto</p></div>
+<form>
+    <input type="text" name="title" id="titleId" placeholder="Titulo">
+    <input type="number" name="price" id="priceId" placeholder="Precio">
+    <input type="text" name="description" id="descriptionId" placeholder="Descripcion">
+    <input type="text" name="thumbnail" id="thumbnailId" placeholder="Thumbnail">
+    <input type="number" name="code" id="codeId" placeholder="Code">
+    <input type="number" name="stock" id="stockId" placeholder="Stock">
+    <input type="checkbox" name="status" id="statusId" ><label for="status">Estado</label>
+    <input type="submit" value="Enviar">
+</form>
+
+<div id="timeReal">Lista de Productos en Tiempo Real</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/main.js"></script>
+</div>
