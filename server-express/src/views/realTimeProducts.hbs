@@ -1,22 +1,52 @@
-<div>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/{{fileCss}}">
+  </head>
+  <body>
+    <div>
+      <div>
+        <h1>Productos en tiempo Real</h1>
+      </div>
+      <h2>Agregar Producto</h2>
+      <div class="formSyle">
+      <form class="formCuerpo">
+        <div>
+        <input type="text" name="title" id="titleId" placeholder="Titulo" />
+        <input type="number" name="price" id="priceId" placeholder="Precio" />
+        <input
+          type="text"
+          name="description"
+          id="descriptionId"
+          placeholder="Descripcion"
+        />
+        <input
+          type="text"
+          name="thumbnail"
+          id="thumbnailId"
+          placeholder="Thumbnail"
+        />
+        <input type="number" name="code" id="codeId" placeholder="Code" />
+        <input type="number" name="stock" id="stockId" placeholder="Stock" />
+        <input type="checkbox" name="status" id="statusId" /><label
+          for="status"
+        >Estado</label>
+        </div>
+        <div>
+        <input type="submit" value="Enviar" />
+        </div>
+      </form>
+      </div>
 
-<div>
-    <h1>Real time products</h1>
-</div>
-<div><p>Agregar Producto</p></div>
-<form>
-    <input type="text" name="title" id="titleId" placeholder="Titulo">
-    <input type="number" name="price" id="priceId" placeholder="Precio">
-    <input type="text" name="description" id="descriptionId" placeholder="Descripcion">
-    <input type="text" name="thumbnail" id="thumbnailId" placeholder="Thumbnail">
-    <input type="number" name="code" id="codeId" placeholder="Code">
-    <input type="number" name="stock" id="stockId" placeholder="Stock">
-    <input type="checkbox" name="status" id="statusId" ><label for="status">Estado</label>
-    <input type="submit" value="Enviar">
-</form>
+      <div>
+        <h4>Lista de Productos en Tiempo Real</h4>
+        <div id="inRealTime"> </div>
+      </div>
 
-<div id="timeReal">Lista de Productos en Tiempo Real</div>
-
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/main.js"></script>
-</div>
+      <script src="/socket.io/socket.io.js"></script>
+      <script src="/js/main.js"></script>
+    </div>
+  </body>
+</html>

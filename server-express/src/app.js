@@ -65,6 +65,7 @@ io.on("connection", async (socket)=>{
 
  socket.emit("allProducts", await manager.getProducts())
 
+
 });
 
 

@@ -15,12 +15,31 @@ form.addEventListener('submit', event => {
         status: dataForm.get('status')== 'on' ? true : false,
     }
 
-    console.log(post)
     socket.emit('new-product', post);
     
     form.reset();
     });
 
 socket.on('allProducts',  (data) => {
-     console.log(data)
+
+    const listaInRealTime = document.getElementById('inRealTime');
+    listaInRealTime.innerHTML = '';
+
+    data.forEach((product) => {
+        
+        listaInRealTime.innerHTML += `
+        <div class="cardProd">
+        <h3> ${product.title} </h3>
+        <p>Descripcion : ${product.description} </p>
+        <p>Precio: ${product.price} </p>
+        <img src="${product.thumbnail}" alt="imagen del producto" width="100px" height="100px">
+        <p>Code: ${product.code} </p>
+        <p>Stock : ${product.stock} </p>
+        <p>Status : ${product.status} </p>
+        <p>Id : ${product.id}</p>  
+        </div>
+        `
+    });
+    
 });
+
